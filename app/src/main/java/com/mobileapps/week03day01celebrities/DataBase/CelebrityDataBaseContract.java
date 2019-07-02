@@ -25,6 +25,12 @@ public class CelebrityDataBaseContract
                 SELECT_ALL_QUERY,KEY_CATEGORY,category);
     }
 
+    public static  String getById(String id)
+    {
+        return String.format("%s WHERE %S = \"%s\"",
+                SELECT_ALL_QUERY,KEY_ID,id);
+    }
+
 
     public static  String getAllCategory()
     {

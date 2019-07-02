@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.NewCelebrityActivity">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/name"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        android:hint="Enter the name"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/etName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Category"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/etCategory"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCategory"
+        android:hint="Enter the Category"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvBirth"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/etCategory"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Birth Date"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/etBirth"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBirth"
+        android:hint="Enter the Birth Date"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvBornCountry"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/etBirth"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Born Country"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/etBornCountry"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBornCountry"
+        android:hint="Enter the Born COuntry"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvBio"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/etBornCountry"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Biography"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/etBio"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBio"
+        android:hint="Enter the Biography"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/etBio"
+        android:text="Add"
+        android:visibility="gone"
+        android:onClick="addNewCelebrity"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+        android:text="Edit"
+        android:onClick="btnEdit"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+        app:layout_constraintEnd_toStartOf="@id/btnSave"
+        android:visibility="gone"
+        android:onClick="btnCancel"
+        android:text="Cancel"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnSave"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Save"
+        android:onClick="btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</android.support.constraint.ConstraintLayout>

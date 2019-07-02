@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Week03Day01 Celebrities</string>
+    <string name="welcome_to_the_best_red_carpet">Welcome to the Best Red Carpet</string>
+    <string name="all_the_celebrities">All the celebrities</string>
+    <string name="category">Category</string>
+    <string name="add_celebrity">Add Celebrity</string>
+    <string name="name">Name</string>
 </resources>

@@ -220,6 +220,27 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
 
 
 
+    public Celebrity getCelebrity(String idToFInd) {
+
+        SQLiteDatabase database = this.getReadableDatabase();
+        Celebrity returnCelebrity = new Celebrity();
+
+        Cursor cursor = database.rawQuery(CelebrityDataBaseContract.getById(idToFInd),null);
+
+        if (cursor.moveToFirst()) {
+                String id = cursor.getString(cursor.getColumnIndex(KEY_ID));
+                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+                String category = cursor.getString(cursor.getColumnIndex(KEY_CATEGORY));
+                String birth = cursor.getString(cursor.getColumnIndex(KEY_BIRTH_DATE));
+                String born = cursor.getString(cursor.getColumnIndex(KEY_BORN_COUNTRY));
+                String bio = cursor.getString(cursor.getColumnIndex(KEY_BIO));
+                returnCelebrity = new Celebrity(id, name, category, birth, born, bio);
+        }
+        cursor.close();
+        database.close();
+        return returnCelebrity;
+    }
+
 
 
 
