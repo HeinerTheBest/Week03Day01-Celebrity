@@ -73,4 +73,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,CelebrityListActivity.class);
         startActivity(intent);
     }
+
+    public void allTheFavoriteCelebrities(View view)
+    {
+        Intent intent = new Intent(this,CelebrityListActivity.class);
+        intent.putExtra("favorite",true);
+        startActivity(intent);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.mobileapps.week03day01celebrities.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,9 +32,16 @@ public class CelebrityListActivity extends AppCompatActivity {
 
     private void getAllCelebrity()
     {
-        celebrities = new CelebrityDataBaseHelper(this).getAllCelebrity();
-        Log.d("Heiner ","Count is = "+new CelebrityDataBaseHelper(this).count());
-        //Log.d("Heiner","I have "+celebrities.get(0).getFirstName());
+        Intent intent = getIntent();
+
+        if(intent.getBooleanExtra("favorite",false))
+        {
+            celebrities = new CelebrityDataBaseHelper(this).getAllFavoriteCelebrity();
+        }
+        else
+        {
+            celebrities = new CelebrityDataBaseHelper(this).getAllCelebrity();
+        }
         CelebritiesAdapter celebritiesAdapter = new CelebritiesAdapter(celebrities,this);
         recyclerView.setAdapter(celebritiesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
