@@ -7,117 +7,182 @@
     android:layout_height="match_parent"
     tools:context=".Activities.NewCelebrityActivity">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+
+    <ImageView
+        android:id="@+id/btnFavorite"
+        android:src="@drawable/favorite_off"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        android:layout_width="50dp"
+        android:onClick="favorite"
+        android:layout_height="50dp" />
+
+    <ImageView
+        android:id="@+id/btnLeft"
+        android:src="@drawable/left"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnFavorite"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/name"
+        app:layout_constraintBottom_toBottomOf="@id/imgPictureDemo"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@id/imgPictureDemo"
+        android:onClick="changeToTheLeft"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgPictureDemo"
+        android:src="@drawable/spiderman"
+        app:layout_constraintTop_toBottomOf="@id/btnFavorite"
+        app:layout_constraintStart_toEndOf="@id/btnLeft"
+        app:layout_constraintEnd_toStartOf="@id/btnRight"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+
+    <ImageView
+        android:id="@+id/btnRight"
+        android:src="@drawable/right"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnFavorite"
+        app:layout_constraintStart_toEndOf="@id/imgPictureDemo"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="@color/colorPrimaryDark"
+        android:onClick="changeToTheRight"
+        app:layout_constraintBottom_toBottomOf="@id/imgPictureDemo"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tvFirstName"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imgPictureDemo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvLastName"
+        android:text="First name"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        android:hint="Enter the name"
+        android:id="@+id/etFirstName"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvFirstName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etLastName"
+        android:hint="Enter first name"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/tvCategory"
+        android:id="@+id/tvLastName"
         android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/etName"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Category"
+        app:layout_constraintTop_toBottomOf="@+id/imgPictureDemo"
+        app:layout_constraintStart_toEndOf="@id/tvFirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Last Name"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/etCategory"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCategory"
-        android:hint="Enter the Category"
+        android:id="@+id/etLastName"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/etFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tvLastName"
+        android:hint="Enter the Last Name"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/tvBirth"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etCategory"
+        android:id="@+id/tvMostPopularMovie"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/etFirstName"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Birth Date"
+        android:text="Most popular movie"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/etBirth"
+        android:id="@+id/etMostPopularMovie"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBirth"
-        android:hint="Enter the Birth Date"
+        app:layout_constraintTop_toBottomOf="@+id/tvMostPopularMovie"
+        android:hint="Enter the Movie"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/etMostPopularMovie"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rbLive"
+            android:text="Live"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rbDead"
+            android:text="Dead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+
     <TextView
-        android:id="@+id/tvBornCountry"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/etBirth"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Born Country"
-        android:layout_margin="5dp"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etBornCountry"
+        android:id="@+id/tvMostRecentScandal"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBornCountry"
-        android:hint="Enter the Born COuntry"
-        android:layout_margin="5dp"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tvBio"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/etBornCountry"
+        app:layout_constraintTop_toBottomOf="@+id/radio"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Biography"
+        android:text="Most recent Scandal"
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etBio"
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        app:layout_constraintTop_toBottomOf="@id/tvMostRecentScandal"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBio"
-        android:hint="Enter the Biography"
-        android:layout_margin="5dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="100dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/etMostRecentScandal"
+                android:layout_width="match_parent"
+                android:hint="Enter the Biography"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/etBio"
-        android:text="Add"
-        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        android:text="Create"
+        android:visibility="visible"
         android:onClick="addNewCelebrity"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btnEdit"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
-        android:text="Edit"
-        android:onClick="btnEdit"
-        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
         app:layout_constraintEnd_toStartOf="@id/btnSave"
-        android:visibility="gone"
+        android:visibility="visible"
         android:onClick="btnCancel"
         android:text="Cancel"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnSave"
-        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
         app:layout_constraintStart_toEndOf="@id/btnCancel"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Save"
         android:onClick="btnUpdate"

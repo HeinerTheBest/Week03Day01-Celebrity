@@ -2,17 +2,22 @@ package com.mobileapps.week03day01celebrities.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mobileapps.week03day01celebrities.Activities.NewCelebrityActivity;
 import com.mobileapps.week03day01celebrities.Models.Celebrity;
 import com.mobileapps.week03day01celebrities.R;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.ViewHolder>
@@ -39,9 +44,21 @@ public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.
     {
         Celebrity celebrity = celebrities.get(i);
 
-        viewHolder.tvName.setText(celebrity.getName());
-        viewHolder.tvBorn.setText(celebrity.getBornCountry());
-        viewHolder.tvCategory.setText(celebrity.getCategory());
+        viewHolder.tvName.setText(celebrity.getFirstName()+" "+celebrity.getLastName());
+
+        if (celebrity.isFavoriteBool())
+        {
+            viewHolder.fav.setImageResource(R.drawable.favorite_on);
+        }
+        else
+        {
+            viewHolder.fav.setImageResource(R.drawable.favorite_off);
+        }
+
+        byte[] outImage= celebrity.getPicture();
+        ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
+        Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+        viewHolder.img.setImageBitmap(theImage);
 
         final String id = String.valueOf(celebrity.getId());
 
@@ -65,15 +82,17 @@ public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        public  TextView tvName;
-        TextView tvCategory;
-        TextView tvBorn;
+        TextView tvName;
+        Button btnDelete,btnUpdate;
+        ImageView img,fav;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName =  itemView.findViewById(R.id.tvName);
-            tvCategory = itemView.findViewById(R.id.tvCategory);
-            tvBorn = itemView.findViewById(R.id.tvBornCountry);
+            tvName =  itemView.findViewById(R.id.tvAllTheName);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnUpdate = itemView.findViewById(R.id.btnUpdate);
+            img = itemView.findViewById(R.id.imgPictureDemo);
+            fav = itemView.findViewById(R.id.btnFavorite);
         }
     }
 }

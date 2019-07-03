@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.mobileapps.week03day01celebrities.Adapters.CelebritiesAdapter;
 import com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseHelper;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class CelebrityListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-
+    ArrayList<Celebrity> celebrities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +24,24 @@ public class CelebrityListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rvCelebrities);
 
-        ArrayList<Celebrity> celebrities = new CelebrityDataBaseHelper(this).getAllCelebrity();
+        getAllCelebrity();
 
+
+    }
+
+    private void getAllCelebrity()
+    {
+        celebrities = new CelebrityDataBaseHelper(this).getAllCelebrity();
+        Log.d("Heiner ","Count is = "+new CelebrityDataBaseHelper(this).count());
+        //Log.d("Heiner","I have "+celebrities.get(0).getFirstName());
         CelebritiesAdapter celebritiesAdapter = new CelebritiesAdapter(celebrities,this);
         recyclerView.setAdapter(celebritiesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllCelebrity();
     }
 }

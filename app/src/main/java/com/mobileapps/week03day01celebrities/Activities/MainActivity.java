@@ -44,21 +44,21 @@ public class MainActivity extends AppCompatActivity {
         /*for (Celebrity celebrity : celebrities)
         {
             Log.d("Heiner","Id "+ celebrity.getId());
-            Log.d("Heiner","Name "+ celebrity.getName());
+            Log.d("Heiner","Name "+ celebrity.getFirstName());
             Log.d("Heiner","Category "+ celebrity.getCategory());
             Log.d("Heiner","Birth Date "+ celebrity.getBirthDate());
             Log.d("Heiner","Born Country "+ celebrity.getBornCountry());
             Log.d("Heiner","Bio "+ celebrity.getBio());
         }*/
 
-        mDB.updateCelebrityCategory("Movie","Suuuper Movies");
+       // mDB.updateCelebrityCategory("Movie","Suuuper Movies");
 
-        HashSet<String> c;
+        /*HashSet<String> c;
         c = mDB.getAllCategory();
         for (String category:c)
         {
             Log.d("Heiner","Category list --> "+category);
-        }
+        }*/
 
     }
 

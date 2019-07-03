@@ -13,40 +13,23 @@ import com.mobileapps.week03day01celebrities.Models.Celebrity;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.CELEBRITY_TABLE_CREATE;
 import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.CELEBRITY_TABLE_NAME;
-import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_BIO;
-import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_BIRTH_DATE;
-import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_BORN_COUNTRY;
-import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_CATEGORY;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.DATABASE_NAME;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.DATABASE_VERSION;
 import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_ID;
-import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_NAME;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_FIRST_NAME;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_IS_ALIVE;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_IS_FAVORITE;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_MOST_POPULAR_MOVIE;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_LAST_NAME;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_LAST_SCANDAL;
+import static com.mobileapps.week03day01celebrities.DataBase.CelebrityDataBaseContract.KEY_PICTURE;
 
 
 public class CelebrityDataBaseHelper extends SQLiteOpenHelper
 {
     final static String TAG = CelebrityDataBaseHelper.class.getSimpleName();
-    final static String DATABASE_NAME = "celebrity_table";
-    final static int DATABASE_VERSION = 1;
-
-
-
-
-
-    // String array of columns.
-    private static final String[] COLUMNS = {KEY_ID, KEY_NAME, KEY_CATEGORY, KEY_BIRTH_DATE, KEY_BORN_COUNTRY, KEY_BIO};
-
-    //query for creating database
-    private static final String CELEBRITY_TABLE_CREATE =
-            "CREATE TABLE " +
-                    CELEBRITY_TABLE_NAME + " (" +
-                                                KEY_ID            + " INTEGER PRIMARY KEY, " + // will auto-increment if no value passed
-                                                KEY_NAME          + " TEXT, " +
-                                                KEY_CATEGORY      + " TEXT, " +
-                                                KEY_BIRTH_DATE    + " TEXT, " +
-                                                KEY_BORN_COUNTRY  + " TEXT, " +
-                                                KEY_BIO           + " TEXT " +
-                                            ");";
-
 
 
 
@@ -77,14 +60,17 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
     {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_NAME, celebrity.getName());
-        contentValues.put(KEY_CATEGORY, celebrity.getCategory());
-        contentValues.put(KEY_BIRTH_DATE, celebrity.getBirthDate());
-        contentValues.put(KEY_BORN_COUNTRY, celebrity.getBornCountry());
-        contentValues.put(KEY_BIO, celebrity.getBio());
+        contentValues.put(KEY_FIRST_NAME,         celebrity.getFirstName());
+        contentValues.put(KEY_LAST_NAME,          celebrity.getLastName());
+        contentValues.put(KEY_MOST_POPULAR_MOVIE, celebrity.getMostPopularMovie());
+        contentValues.put(KEY_IS_ALIVE,           celebrity.isAlive());
+        contentValues.put(KEY_LAST_SCANDAL,       celebrity.getMostRecentScandal());
+        contentValues.put(KEY_IS_FAVORITE,        celebrity.isFavorite());
+        contentValues.put(KEY_PICTURE,            celebrity.getPicture());
 
         final long id = database.insert(CELEBRITY_TABLE_NAME, null, contentValues);
         database.close();
+        Log.d("Heiner ","We inserted "+celebrity.getFirstName()+"with id = "+id);
         return id;
     }
 
@@ -99,24 +85,26 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         return itemsDeleted;
     }
 
-    public int deleteByCategory(String category)
+    /*public int deleteByCategory(String category)
     {
         SQLiteDatabase database = this.getWritableDatabase();
         final int itemsDeleted = database.delete(CELEBRITY_TABLE_NAME,  KEY_CATEGORY + " =? ", new String[]{String.valueOf(category)});
         database.close();
         return itemsDeleted;
-    }
+    }*/
 
     //Updates
     public int updateCelebrityByID(Celebrity celebrity) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(KEY_NAME, celebrity.getName());
-        contentValues.put(KEY_CATEGORY, celebrity.getCategory());
-        contentValues.put(KEY_BIRTH_DATE, celebrity.getBirthDate());
-        contentValues.put(KEY_BORN_COUNTRY, celebrity.getBornCountry());
-        contentValues.put(KEY_BIO, celebrity.getBio());
+        contentValues.put(KEY_FIRST_NAME,         celebrity.getFirstName());
+        contentValues.put(KEY_LAST_NAME,          celebrity.getLastName());
+        contentValues.put(KEY_MOST_POPULAR_MOVIE, celebrity.getMostPopularMovie());
+        contentValues.put(KEY_IS_ALIVE,           celebrity.isAlive());
+        contentValues.put(KEY_LAST_SCANDAL,       celebrity.getMostRecentScandal());
+        contentValues.put(KEY_IS_FAVORITE,        celebrity.isFavorite());
+        contentValues.put(KEY_PICTURE,            celebrity.getPicture());
 
 
         final int numberOfRowsUpdated = database.update(CELEBRITY_TABLE_NAME,
@@ -129,7 +117,7 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         return numberOfRowsUpdated;
     }
 
-    public int updateCelebrityCategory(String oldCategory, String newCategory) {
+   /* public int updateCelebrityCategory(String oldCategory, String newCategory) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -143,7 +131,7 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         database.close();
 
         return numberOfRowsUpdated;
-    }
+    }*/
 
 
     //Count
@@ -164,13 +152,17 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         Cursor cursor = database.rawQuery("SELECT * FROM "+ CELEBRITY_TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                String id = cursor.getString(cursor.getColumnIndex(KEY_ID));
-                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-                String category = cursor.getString(cursor.getColumnIndex(KEY_CATEGORY));
-                String birth = cursor.getString(cursor.getColumnIndex(KEY_BIRTH_DATE));
-                String born = cursor.getString(cursor.getColumnIndex(KEY_BORN_COUNTRY));
-                String bio = cursor.getString(cursor.getColumnIndex(KEY_BIO));
-                returnList.add(new Celebrity(id, name, category, birth, born, bio));
+                String  id                =                    cursor.getString(cursor.getColumnIndex(KEY_ID))                ;
+                String  firstName         =                    cursor.getString(cursor.getColumnIndex(KEY_FIRST_NAME))        ;
+                String  lastName          =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_NAME))         ;
+                String  mostPopularMovie  =                    cursor.getString(cursor.getColumnIndex(KEY_MOST_POPULAR_MOVIE));
+                boolean isAlive           = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_ALIVE)))         ;
+                String  lastScandal       =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_SCANDAL))      ;
+                boolean isFavorite        = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_FAVORITE)))      ;
+                byte[]  picture           =                    cursor.getBlob  (cursor.getColumnIndex(KEY_PICTURE))           ;
+
+                returnList.add(new Celebrity(id, firstName,lastName,mostPopularMovie,isAlive,lastScandal,isFavorite,picture));
+                Log.d("Heiner","Adding to the returnList in Helper to "+firstName+" with id "+id);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -178,21 +170,24 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         return returnList;
     }
 
-    public ArrayList<Celebrity> getAllCelebrityByCategory(String categoryToFind) {
+    public ArrayList<Celebrity> getAllFavoriteCelebrity() {
         SQLiteDatabase database = this.getReadableDatabase();
         ArrayList<Celebrity> returnList = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery(CelebrityDataBaseContract.getByCategory(categoryToFind),null);
+        Cursor cursor = database.rawQuery(CelebrityDataBaseContract.getIfIsFavorite(),null);
 
         if (cursor.moveToFirst()) {
             do {
-                String id = cursor.getString(cursor.getColumnIndex(KEY_ID));
-                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-                String category = cursor.getString(cursor.getColumnIndex(KEY_CATEGORY));
-                String birth = cursor.getString(cursor.getColumnIndex(KEY_BIRTH_DATE));
-                String born = cursor.getString(cursor.getColumnIndex(KEY_BORN_COUNTRY));
-                String bio = cursor.getString(cursor.getColumnIndex(KEY_BIO));
-                returnList.add(new Celebrity(id, name, category, birth, born, bio));
+                String  id                =                    cursor.getString(cursor.getColumnIndex(KEY_ID))                ;
+                String  firstName         =                    cursor.getString(cursor.getColumnIndex(KEY_FIRST_NAME))        ;
+                String  lastName          =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_NAME))         ;
+                String  mostPopularMovie  =                    cursor.getString(cursor.getColumnIndex(KEY_MOST_POPULAR_MOVIE));
+                boolean isAlive           = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_ALIVE)))         ;
+                String  lastScandal       =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_SCANDAL))      ;
+                boolean isFavorite        = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_FAVORITE)))      ;
+                byte[]  picture           =                    cursor.getBlob  (cursor.getColumnIndex(KEY_PICTURE))           ;
+
+                returnList.add(new Celebrity(id, firstName,lastName,mostPopularMovie,isAlive,lastScandal,isFavorite,picture));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -200,7 +195,7 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         return returnList;
     }
 
-    public HashSet<String> getAllCategory() {
+   /* public HashSet<String> getAllCategory() {
         SQLiteDatabase database = this.getReadableDatabase();
         HashSet<String> returnList = new HashSet<>();
 
@@ -215,7 +210,7 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         cursor.close();
         database.close();
         return returnList;
-    }
+    }*/
 
 
 
@@ -228,13 +223,17 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
         Cursor cursor = database.rawQuery(CelebrityDataBaseContract.getById(idToFInd),null);
 
         if (cursor.moveToFirst()) {
-                String id = cursor.getString(cursor.getColumnIndex(KEY_ID));
-                String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-                String category = cursor.getString(cursor.getColumnIndex(KEY_CATEGORY));
-                String birth = cursor.getString(cursor.getColumnIndex(KEY_BIRTH_DATE));
-                String born = cursor.getString(cursor.getColumnIndex(KEY_BORN_COUNTRY));
-                String bio = cursor.getString(cursor.getColumnIndex(KEY_BIO));
-                returnCelebrity = new Celebrity(id, name, category, birth, born, bio);
+
+            String  id                =                    cursor.getString(cursor.getColumnIndex(KEY_ID))                ;
+            String  firstName         =                    cursor.getString(cursor.getColumnIndex(KEY_FIRST_NAME))        ;
+            String  lastName          =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_NAME))         ;
+            String  mostPopularMovie  =                    cursor.getString(cursor.getColumnIndex(KEY_MOST_POPULAR_MOVIE));
+            boolean isAlive           = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_ALIVE)))         ;
+            String  lastScandal       =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_SCANDAL))      ;
+            boolean isFavorite        = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_FAVORITE)))      ;
+            byte[]  picture           =                    cursor.getBlob  (cursor.getColumnIndex(KEY_PICTURE))           ;
+
+            returnCelebrity = new Celebrity(id, firstName,lastName,mostPopularMovie,isAlive,lastScandal,isFavorite,picture);
         }
         cursor.close();
         database.close();
