@@ -42,7 +42,7 @@ public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i)
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i)
     {
         final Celebrity celebrity = celebrities.get(i);
 
@@ -57,7 +57,6 @@ public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.
             viewHolder.fav.setImageResource(R.drawable.favorite_off);
         }
 
-        Log.d("Heiner","Favorite for id "+celebrity.getId()+" have favorite = "+celebrity.isFavoriteBool());
 
         byte[] outImage= celebrity.getPicture();
         ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
@@ -68,10 +67,15 @@ public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.
 
         final String id = String.valueOf(celebrity.getId());
 
+        final Intent intent = new Intent(context,NewCelebrityActivity.class);
+        intent.putExtra("celebrity_id",id);
+
+
         viewHolder.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Heiner","update");
+                intent.putExtra("edit",true);
+                context.startActivity(intent);
             }
         });
 
@@ -79,13 +83,24 @@ public class CelebritiesAdapter extends RecyclerView.Adapter<CelebritiesAdapter.
             @Override
             public void onClick(View v) {
                 Log.d("Heiner","Delete");
+                new CelebrityDataBaseHelper(context).deleteByID(String.valueOf(celebrity.getId()));
+                celebrities.remove(i);
+                notifyItemRemoved(i);
+                notifyItemRangeChanged(i,celebrities.size());
             }
         });
 
         viewHolder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Heiner","Detail");
+                context.startActivity(intent);
+            }
+        });
+
+        viewHolder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(intent);
             }
         });
 

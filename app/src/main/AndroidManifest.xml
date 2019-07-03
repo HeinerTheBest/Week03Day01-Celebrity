@@ -9,11 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CelebrityListActivity"></activity>
+        <activity
+            android:name=".Activities.CelebrityListActivity"
+            android:label="Celebrities List"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mobileapps.week03day01celebrities.Activities.MainActivity" />
+        </activity>
 
-        <activity android:name=".Activities.NewCelebrityActivity" />
+        <activity
+            android:name=".Activities.NewCelebrityActivity"
+            android:label="Celebrity Information"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mobileapps.week03day01celebrities.Activities.CelebrityListActivity" />
+        </activity>
 
-        <activity android:name=".Activities.MainActivity">
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="Hollywood"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

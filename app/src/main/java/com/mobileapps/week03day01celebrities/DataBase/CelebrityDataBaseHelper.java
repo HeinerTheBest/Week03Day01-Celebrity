@@ -224,19 +224,20 @@ public class CelebrityDataBaseHelper extends SQLiteOpenHelper
 
         if (cursor.moveToFirst()) {
 
-            String  id                =                    cursor.getString(cursor.getColumnIndex(KEY_ID))                ;
-            String  firstName         =                    cursor.getString(cursor.getColumnIndex(KEY_FIRST_NAME))        ;
-            String  lastName          =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_NAME))         ;
-            String  mostPopularMovie  =                    cursor.getString(cursor.getColumnIndex(KEY_MOST_POPULAR_MOVIE));
-            boolean isAlive           = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_ALIVE)))         ;
-            String  lastScandal       =                    cursor.getString(cursor.getColumnIndex(KEY_LAST_SCANDAL))      ;
-            boolean isFavorite        = Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_FAVORITE)))      ;
-            byte[]  picture           =                    cursor.getBlob  (cursor.getColumnIndex(KEY_PICTURE))           ;
+            String  id                =                      cursor.getString(cursor.getColumnIndex(KEY_ID))                ;
+            String  firstName         =                      cursor.getString(cursor.getColumnIndex(KEY_FIRST_NAME))        ;
+            String  lastName          =                      cursor.getString(cursor.getColumnIndex(KEY_LAST_NAME))         ;
+            String  mostPopularMovie  =                      cursor.getString(cursor.getColumnIndex(KEY_MOST_POPULAR_MOVIE));
+            boolean isAlive           = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_ALIVE)))         ;
+            String  lastScandal       =                      cursor.getString(cursor.getColumnIndex(KEY_LAST_SCANDAL))      ;
+            boolean isFavorite        = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(KEY_IS_FAVORITE)))      ;
+            byte[]  picture           =                      cursor.getBlob  (cursor.getColumnIndex(KEY_PICTURE))           ;
 
             returnCelebrity = new Celebrity(id, firstName,lastName,mostPopularMovie,isAlive,lastScandal,isFavorite,picture);
         }
         cursor.close();
         database.close();
+        Log.d("Heiner","Get celebrity with favorite = "+returnCelebrity.isFavoriteBool());
         return returnCelebrity;
     }
 

@@ -34,19 +34,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="allTheFavoriteCelebrities"
-        app:layout_constraintBottom_toTopOf="@id/btnCategory"
+        app:layout_constraintBottom_toTopOf="@id/btnAddCelebrity"
         app:layout_constraintTop_toBottomOf="@+id/btnAllCelebrities"
         android:text="@string/all_the_favorite_celebrities" />
 
-    <Button
-        android:id="@+id/btnCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAllCelebrities"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnAddCelebrity"
-        android:text="@string/category" />
 
     <Button
         android:id="@+id/btnAddCelebrity"
@@ -55,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:onClick="addCelebrity"
-        app:layout_constraintTop_toBottomOf="@id/btnCategory"
+        app:layout_constraintTop_toBottomOf="@id/btnAllFavoriteCelebrities"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/add_celebrity" />
 
