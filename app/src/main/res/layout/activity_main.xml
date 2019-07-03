@@ -4,60 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".Activities.MainActivity">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_to_the_best_red_carpet"
-        app:layout_constraintBottom_toTopOf="@id/btnAllCelebrities"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
+        android:id="@+id/welcome"
+        android:src="@drawable/welcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="45dp"
+        android:layout_marginStart="45dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+
+
+    <ImageButton
+        android:id="@+id/btnAddCelebrity"
+        android:onClick="addCelebrity"
+        android:background="@drawable/add_new"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnAllCelebrities"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
         android:id="@+id/btnAllCelebrities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/all_celebrities"
         android:onClick="allTheCelebrities"
-        app:layout_constraintBottom_toTopOf="@id/btnAllFavoriteCelebrities"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        android:text="@string/all_the_celebrities" />
-
-    <Button
-        android:id="@+id/btnAllFavoriteCelebrities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="allTheFavoriteCelebrities"
         app:layout_constraintBottom_toTopOf="@id/btnAddCelebrity"
-        app:layout_constraintTop_toBottomOf="@+id/btnAllCelebrities"
-        android:text="@string/all_the_favorite_celebrities" />
-
-
-    <Button
-        android:id="@+id/btnAddCelebrity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="addCelebrity"
-        app:layout_constraintTop_toBottomOf="@id/btnAllFavoriteCelebrities"
-        android:text="@string/add_celebrity" />
+        app:layout_constraintTop_toBottomOf="@id/btnAllFavoriteCelebrities" />
 
-    <Button
+    <TextView
+        android:text="Get all Celebrities"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/btnAllCelebrities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/btnAllFavoriteCelebrities"
+        android:onClick="allTheFavoriteCelebrities"
+        android:background="@drawable/celebrities_vip"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/welcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Create new Celebrity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddCelebrity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Just VIP"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnAllFavoriteCelebrities"
+        android:layout_height="wrap_content" />
+
+
+    <ImageButton
         android:id="@+id/btnFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="openFile"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddCelebrity"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/folder"
+        android:layout_margin="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Check File"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:onClick="openFile"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="File Feature"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@+id/btnFile"
+        app:layout_constraintBottom_toBottomOf="@id/btnFile"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@id/btnFile"
+        android:layout_marginEnd="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
