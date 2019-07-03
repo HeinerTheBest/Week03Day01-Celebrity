@@ -10,27 +10,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.CelebrityListActivity"
-            android:label="Celebrities List"
+            android:name=".Activities.FileStorageActivity"
+            android:label="File celebrity_file.txt"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mobileapps.week03day01celebrities.Activities.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".Activities.CelebrityListActivity"
+            android:label="Celebrities List">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mobileapps.week03day01celebrities.Activities.MainActivity" />
+        </activity>
         <activity
             android:name=".Activities.NewCelebrityActivity"
-            android:label="Celebrity Information"
-            >
+            android:label="Celebrity Information">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mobileapps.week03day01celebrities.Activities.CelebrityListActivity" />
         </activity>
-
         <activity
             android:name=".Activities.MainActivity"
-            android:label="Hollywood"
-            >
+            android:label="Hollywood">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
