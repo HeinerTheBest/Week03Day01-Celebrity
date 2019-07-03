@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobileapps.week03day01celebrities">
-
+    <uses-permission android:name="key.to.gate.of.hollywood"/>
+    <permission
+        android:name="key.to.gate.of.hollywood"
+        android:protectionLevel="normal"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,6 +43,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.mobileapps.week03day01celebrities"
+            android:name=".Providers.CelebritiesContentProviders"
+            android:permission="key.to.gate.of.hollywood"/>
+
     </application>
 
 </manifest>
